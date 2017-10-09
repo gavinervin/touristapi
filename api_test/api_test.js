@@ -8,6 +8,7 @@
           mapTypeId: google.maps.MapTypeId.HYBRID
         });
 
+
          /*input bar for testing, will move from inside the map to our html*/
 
         var input = document.getElementById('pac-input');
