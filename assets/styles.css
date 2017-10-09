@@ -1,0 +1,15 @@
+.container {
+	background-color: #723d22;
+	color: #e8cfa2;
+}
+
+ #cityName, #zipCode {
+  color: #000;
+  border: 3px solid;
+  border-color: #82685c;
+}
+
+#submitCity {
+	background-color: #82685c;
+	margin: 5px;
+}
