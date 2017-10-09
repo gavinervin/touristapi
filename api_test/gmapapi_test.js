@@ -55,7 +55,7 @@
             }));
 
              if (place.geometry.viewport) {
-              // Only geocodes have viewport.
+            
               bounds.union(place.geometry.viewport);
             } else {
               bounds.extend(place.geometry.location);
