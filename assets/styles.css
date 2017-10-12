@@ -13,3 +13,9 @@
 	background-color: #82685c;
 	margin: 5px;
 }
+
+#map {
+	width:500px;
+	height:400px;
+	margin:10px;
+}
