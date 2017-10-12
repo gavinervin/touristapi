@@ -1,6 +1,6 @@
 
 /*default map on app, coords set to our classroom location*/
-/*maptype set to hybrid instead of default streetmap. this gives satellite view with markers*//
+/*maptype set to hybrid instead of default streetmap. this gives satellite view with markers*/
  function initAutocomplete() {
         var map = new google.maps.Map(document.getElementById('map'), {
           center: {lat: 35.89989698213954, lng: -79.01249361429444},
@@ -64,7 +64,3 @@
           map.fitBounds(bounds);
         });
       }
-
-    </script>
-    <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNcKtuovwZfvrD9e3jO8lHrn6buwQ3Rg&libraries=places&callback=initAutocomplete"
-         async defer></script>
