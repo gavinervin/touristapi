@@ -17,6 +17,10 @@
     // Initializing our recent search count at 0
     var last10LocationSearches = [];
 
+    // the below can toggle all the console.log messages and alerts used for testing purposes
+    var debuggingMessagesTurnedOn = true;
+    //var debuggingMessagesTurnedOn = false;
+
 
 $("#submitCity").on("click", function() {
 //$("#submitCity").submit( function() {
@@ -24,20 +28,28 @@ $("#submitCity").on("click", function() {
 	var city = $("#cityName").val().trim();
 	var zip = $("#zipCode").val().trim();
 	var search2Push;
-    console.log("City Submit button was clicked.");
-    console.log("City Name is : " + city);
-    console.log("Zip Code is: " + zip);
+	if(debuggingMessagesTurnedOn){
+    	console.log("City Submit button was clicked.");
+    	console.log("City Name is : " + city);
+    	console.log("Zip Code is: " + zip);
+	}
     // add search city+zip to locationSearches
     search2Push = city + " " + zip;
 
     // logic to limit to last ten searhes
-   	console.log("last10LocationSearches.length = " + last10LocationSearches.length)
+    	if(debuggingMessagesTurnedOn){
+    		console.log("last10LocationSearches.length = " + last10LocationSearches.length)
+    	}
 
-    if (last10LocationSearches.length<10){
-    	console.log("list < 10")
+    if (last10LocationSearches.length<9){ // looks at array length before pushing
+    	if(debuggingMessagesTurnedOn){
+    		console.log("list < 10");
+    	}
     	last10LocationSearches.push(search2Push);
 	}else{// if already 10 items, pop oldest one off array
-    	console.log("list is over 10, popping oldest item")		
+    	if(debuggingMessagesTurnedOn){
+			console.log("list is over 10, popping oldest item")		
+		}
     	last10LocationSearches.shift();
     	last10LocationSearches.push(search2Push);
 	}
@@ -59,28 +71,53 @@ database.ref().on("value", function(snapshot) {
 
 
   if (snapshot.child("recentSearches").exists() && snapshot.child("locationArray").exists()) {
-  	console.log("This is when there has been a recent search");
+	if(debuggingMessagesTurnedOn){
+		console.log("This is when there is search history to read.");
+	}
   	var display = snapshot.child("recentSearches").val();
 
   	//$("#Weather").text(display);
   	var searchList = snapshot.child("locationArray").val();
-  	console.log("Snapshot Array is: " + searchList);
+	if(debuggingMessagesTurnedOn){
+	  	console.log("Snapshot Array is: " + searchList);
+	}
   	$("#Weather").empty();
   	last10LocationSearches = [];
   	for (var i = 0; i<searchList.length;i++){
-  		console.log("Item# " + i + " has value of " + searchList[i]);
-	    $("#Weather").prepend("<p>" + searchList[i] + "</p>");
-	    last10LocationSearches.push(searchList[i]);
+	if(debuggingMessagesTurnedOn){
+	  console.log("Item# " + i + " has value of " + searchList[i]);
+	}
+	  last10LocationSearches.push(searchList[i]);
+      var buttonList = $("<button>");
+      buttonList.text(searchList[i]);
+      buttonList.attr("location-to-search", searchList[i]);
+      buttonList.attr("class", "btn btn-default");
+      //buttonList.attr("display", "block");
+      // buttonList.attr("background-color", "#e7e7e7");
+      // buttonList.attr("color", "black");
+//      $("#Weather").prepend("<p>" + buttonList + "<p>");   
+      $("#Weather").prepend("<p>");   
+      $("#Weather").prepend(buttonList);
+   
 
   	}
-  	console.log("Local array looks like this: " + last10LocationSearches);
 
-  	// loop thru recentSearches.length and display them
-  	// add them to last10LocationSearches
-  	// make them clickable search items
+       // now make an on.clock event for the buttons to trigger a search
+      $(".btn-default").on("click", function() {
+		if(debuggingMessagesTurnedOn){
+      	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
+      }
+      });
+      // console logging array to be sure what it looks like
+	if(debuggingMessagesTurnedOn){
+	  	console.log("Local array looks like this: " + last10LocationSearches);
+	  }
+
   }else{
-  	console.log("This is when there HAVE NOT BEEN ANY search");
-  	//display no recent searches
+	if(debuggingMessagesTurnedOn){
+	  	console.log("This is when there HAS NOT BEEN ANY search(firebase was reset, or zombie apocalypse has destroyed the data center)");
+	}
+  	//display that are no recent searches
     $("#Weather").text(currentSearch);
 
   }
