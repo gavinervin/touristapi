@@ -1,9 +1,8 @@
 
 
 body{
-	background: url('./images/bgmap.jpg')
-  background-repeat: no-repeat;
-}
+	background: url('../images/bgmap.jpg');
+  }
 .container {
 	background-color: #723d22;
 	color: #e8cfa2;
