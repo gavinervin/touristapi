@@ -16,7 +16,7 @@
 
 <script src="assets/easterEggTest.js"></script>
 
-<script type="text/javascript" src="api_test/api_test.js"></script>
+<script type="text/javascript" src="assets/map.js"></script>
 </head>
 
 <body>
@@ -32,7 +32,7 @@
    	  <div class="col-md-8">
         <form id = "entryForm">
           <p>Put the City Name in the text box below:</p>
-     	  <input id = "cityName" type="text"><br>
+     	  <input id = "cityName" type="text" placeholder="City Name"> <br>
      	    <p>Put the Zip Code in the text box below:</p>
      	  <input id = "zipCode" type="text"><br>
      	  <button id= "submitCity" type= "submit" class= "btn btn-default">Submit<br>
@@ -50,7 +50,7 @@
     <!-- Third Row -->
    <div class="row justify-content-md-center">
      <div class="col-md-8">
-       <div id= map>
+       <div id= "map">
        	<!-- Put map here -->
        </div>
      </div>
@@ -72,4 +72,7 @@
 </body>
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
 <script type="text/javascript" src="assets/app.js"></script>
+<script type="text/javascript" src="assets/map.js"></script>
+
+
 </html>
