@@ -2,7 +2,7 @@
 
 body{
 	background: url('./images/bgmap.jpg')
-
+  background-repeat: no-repeat;
 }
 .container {
 	background-color: #723d22;
