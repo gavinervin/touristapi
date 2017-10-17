@@ -26,15 +26,16 @@ $("#submitCity").on("click", function() {
 //$("#submitCity").submit( function() {
 	event.preventDefault();
 	var city = $("#cityName").val().trim();
-	var zip = $("#zipCode").val().trim();
+	// var zip = $("#zipCode").val().trim();
 	var search2Push;
 	if(debuggingMessagesTurnedOn){
     	console.log("City Submit button was clicked.");
     	console.log("City Name is : " + city);
-    	console.log("Zip Code is: " + zip);
+    	// console.log("Zip Code is: " + zip);
 	}
     // add search city+zip to locationSearches
-    search2Push = city + " " + zip;
+    //search2Push = city + " " + zip;
+    search2Push = city;
 
     // logic to limit to last ten searhes
     	if(debuggingMessagesTurnedOn){
@@ -91,7 +92,7 @@ database.ref().on("value", function(snapshot) {
       var buttonList = $("<button>");
       buttonList.text(searchList[i]);
       buttonList.attr("location-to-search", searchList[i]);
-      buttonList.attr("class", "btn btn-default");
+      buttonList.attr("class", "btn btn-default search-button");
       //buttonList.attr("display", "block");
       // buttonList.attr("background-color", "#e7e7e7");
       // buttonList.attr("color", "black");
@@ -103,20 +104,113 @@ database.ref().on("value", function(snapshot) {
   	}
 
        // now make an on.clock event for the buttons to trigger a search
-      $(".btn-default").on("click", function() {
-		if(debuggingMessagesTurnedOn){
-      	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
-      }
+//      $(".btn-default").on("click", function() {
+      $(".search-button").on("click", function() {
+            		if(debuggingMessagesTurnedOn){
+                  	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
+                  }
+
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.89989698213954, lng: -79.01249361429444},
+            zoom: 19,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+          });       
+        var input = $(this).attr("location-to-search");
+//        var input = map.getDiv().querySelector($(this).attr("location-to-search"));
+        //var divInput = map.getDiv().querySelector(input);
+        console.log('recent search button', input);
+        //console.log('divInput', divInput);
+//        var searchBox = new google.maps.places.SearchBox(input);
+        var searchBox = new google.maps.places.PlacesService(map);
+//        var searchBox = new google.maps.places.querySelector(input);
+
+google.maps.event.addListenerOnce(map, 'idle', function(){  
+    var request = {
+//        query: 'Orlando'
+        query: input
+    };
+
+    //searchBox = new google.maps.places.PlacesService(map);
+    searchBox.textSearch(request, callback);
+
+    function callback(results, status) {
+        if (status == google.maps.places.PlacesServiceStatus.OK) {
+            //grab the first item, Orlando, Florida, USA
+            var place = results[0];
+            input.value = place.formatted_address; 
+            map.setCenter(place.geometry.location);
+        }
+    }
+//});       
+//        var searchBox = new google.maps.places.query(input);
+       
+
+        
+        // map.addListener('bounds_changed', function() {
+        //   searchBox.setBounds(map.getBounds());
+        // });
+
+        // var markers = [];
+       
+        // searchBox.addListener('places_changed', function() {
+        //   var places = searchBox.getPlaces();
+
+        //   if (places.length == 0) {
+        //     return;
+        //   }
+          
+        //   markers.forEach(function(marker) {
+        //     marker.setMap(null);
+        //   });
+        //   markers = [];
+
+        //   var bounds = new google.maps.LatLngBounds();
+        //   places.forEach(function(place) {
+        //     if (!place.geometry) {
+              
+        //       return;
+        //     }
+        //     var icon = {
+        //       url: place.icon,
+        //       size: new google.maps.Size(71, 71),
+        //       origin: new google.maps.Point(0, 0),
+        //       anchor: new google.maps.Point(17, 34),
+        //       scaledSize: new google.maps.Size(25, 25)
+        //     };
+
+        //     markers.push(new google.maps.Marker({
+        //       map: map,
+        //       icon: icon,
+        //       title: place.name,
+        //       position: place.geometry.location
+        //     }));
+
+        //      if (place.geometry.viewport) {
+              
+        //       bounds.union(place.geometry.viewport);
+        //     } else {
+        //       bounds.extend(place.geometry.location);
+        //     }
+        //   });
+        //   map.fitBounds(bounds);
+        // });
+      //}
+
+
+
+});
+
       });
       // console logging array to be sure what it looks like
-	if(debuggingMessagesTurnedOn){
-	  	console.log("Local array looks like this: " + last10LocationSearches);
-	  }
+      	if(debuggingMessagesTurnedOn){
+      	  	console.log("Local array looks like this: " + last10LocationSearches);
+      	  }
 
   }else{
-	if(debuggingMessagesTurnedOn){
-	  	console.log("This is when there HAS NOT BEEN ANY search(firebase was reset, or zombie apocalypse has destroyed the data center)");
-	}
+        	if(debuggingMessagesTurnedOn){
+        	  	console.log("This is when there HAS NOT BEEN ANY search(firebase was reset, or zombie apocalypse has destroyed the data center)");
+        	}
   	//display that are no recent searches
     $("#Weather").text(currentSearch);
 

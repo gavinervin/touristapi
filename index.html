@@ -8,8 +8,8 @@
 
 <link rel="stylesheet" href="assets/styles.css">
 
-<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNcKtuovwZfvrD9e3jO8lHrn6buwQ3Rg&libraries=places&callback=initAutocomplete"
- async defer></script>
+<!-- <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNcKtuovwZfvrD9e3jO8lHrn6buwQ3Rg&libraries=places&callback=initAutocomplete"
+ async defer></script> -->
 <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
 
 <script type="text/javascript" src="https://cdn.rawgit.com/mikeflynn/egg.js/master/egg.min.js"></script>
@@ -33,9 +33,9 @@
         <form id = "entryForm">
           <p>Put the City Name in the text box below:</p>
      	  <input id = "cityName" type="text" placeholder="City Name"> <br>
-     	    <p>Put the Zip Code in the text box below:</p>
-     	  <input id = "zipCode" type="text"><br>
-     	  <button id= "submitCity" type= "submit" class= "btn btn-default">Submit<br>
+<!--      	    <p>Put the Zip Code in the text box below:</p>
+     	  <input id = "zipCode" type="text"><br> -->
+     	  <button id= "submitCity" type= "submit" class= "btn btn-default">Save Search<br>
         </form>
       </div>
       <div class="col-md-4">
@@ -70,9 +70,16 @@
   </div>
   </div>
 </body>
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNcKtuovwZfvrD9e3jO8lHrn6buwQ3Rg&libraries=places&callback=initAutocomplete"
+ async defer></script>
+
 <script src="https://www.gstatic.com/firebasejs/3.7.1/firebase.js"></script>
-<script type="text/javascript" src="assets/app.js"></script>
-<script type="text/javascript" src="assets/map.js"></script>
+<!-- <script type="text/javascript" src="assets/app.js"></script>
+ --><script type="text/javascript" src="assets/map.js"></script>
+ <script type="text/javascript" src="assets/app.js"></script>
+
+
+
 
 
 </html>
