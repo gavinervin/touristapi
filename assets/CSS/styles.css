@@ -1,10 +1,8 @@
 
 
 body{
-	background: url('./images/bgmap.jpg')
-	background-repeat: no-repeat;
-
-}
+	background: url('../images/bgmap.jpg');
+  }
 .container {
 	background-color: #723d22;
 	color: #e8cfa2;
@@ -34,4 +32,9 @@ body{
 	width:500px;
 	height:400px;
 	margin:10px;
+}
+
+.search-button {
+  background-color: #82685c;
+  color: #f7f6c5;
 }
