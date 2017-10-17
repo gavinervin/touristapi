@@ -91,7 +91,8 @@ database.ref().on("value", function(snapshot) {
       var buttonList = $("<button>");
       buttonList.text(searchList[i]);
       buttonList.attr("location-to-search", searchList[i]);
-      buttonList.attr("class", "btn btn-default");
+//      buttonList.attr("class", "btn btn-default");
+      buttonList.attr("class", "btn btn-default search-button");		
       //buttonList.attr("display", "block");
       // buttonList.attr("background-color", "#e7e7e7");
       // buttonList.attr("color", "black");
@@ -103,7 +104,8 @@ database.ref().on("value", function(snapshot) {
   	}
 
        // now make an on.clock event for the buttons to trigger a search
-      $(".btn-default").on("click", function() {
+      $(".btn-button").on("click", function() {
+      //$(".search-default").on("click", function() {
 		if(debuggingMessagesTurnedOn){
       	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
       }
