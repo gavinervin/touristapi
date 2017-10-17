@@ -33,3 +33,8 @@ body{
 	height:400px;
 	margin:10px;
 }
+
+.search-button {
+  background-color: #82685c;
+  color: #f7f6c5;
+}
