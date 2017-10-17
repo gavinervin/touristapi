@@ -92,12 +92,8 @@ database.ref().on("value", function(snapshot) {
       var buttonList = $("<button>");
       buttonList.text(searchList[i]);
       buttonList.attr("location-to-search", searchList[i]);
-<<<<<<< HEAD:assets/app.js
       buttonList.attr("class", "btn btn-default search-button");
-=======
 //      buttonList.attr("class", "btn btn-default");
-      buttonList.attr("class", "btn btn-default search-button");		
->>>>>>> 923ff197eb2ee59ccc0a1490213a9e9a5dc24a43:assets/javascript/app.js
       //buttonList.attr("display", "block");
       // buttonList.attr("background-color", "#e7e7e7");
       // buttonList.attr("color", "black");
@@ -109,7 +105,6 @@ database.ref().on("value", function(snapshot) {
   	}
 
        // now make an on.clock event for the buttons to trigger a search
-<<<<<<< HEAD:assets/app.js
 //      $(".btn-default").on("click", function() {
       $(".search-button").on("click", function() {
             		if(debuggingMessagesTurnedOn){
@@ -207,13 +202,11 @@ google.maps.event.addListenerOnce(map, 'idle', function(){
 
 });
 
-=======
       $(".btn-button").on("click", function() {
-      //$(".search-default").on("click", function() {
+      //$(".search-button").on("click", function() {
 		if(debuggingMessagesTurnedOn){
       	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
       }
->>>>>>> 923ff197eb2ee59ccc0a1490213a9e9a5dc24a43:assets/javascript/app.js
       });
       // console logging array to be sure what it looks like
       	if(debuggingMessagesTurnedOn){
