@@ -23,34 +23,32 @@
 
 
 $("#submitCity").on("click", function() {
-//$("#submitCity").submit( function() {
-	event.preventDefault();
-	var city = $("#cityName").val().trim();
-	// var zip = $("#zipCode").val().trim();
-	var search2Push;
-	if(debuggingMessagesTurnedOn){
-    	console.log("City Submit button was clicked.");
-    	console.log("City Name is : " + city);
-    	// console.log("Zip Code is: " + zip);
-	}
-    // add search city+zip to locationSearches
-    //search2Push = city + " " + zip;
-    search2Push = city;
+      	event.preventDefault();
+      	var city = $("#cityName").val().trim();
+      	// var zip = $("#zipCode").val().trim();
+      	var search2Push;
+      	if(debuggingMessagesTurnedOn){
+          	console.log("City Submit button was clicked.");
+          	console.log("City Name is : " + city);
+          	// console.log("Zip Code is: " + zip);
+      	}
+ 
+          search2Push = city;
 
     // logic to limit to last ten searhes
-    	if(debuggingMessagesTurnedOn){
-    		console.log("last10LocationSearches.length = " + last10LocationSearches.length)
-    	}
+          	if(debuggingMessagesTurnedOn){
+          		console.log("last10LocationSearches.length = " + last10LocationSearches.length)
+          	}
 
     if (last10LocationSearches.length<9){ // looks at array length before pushing
-    	if(debuggingMessagesTurnedOn){
-    		console.log("list < 10");
-    	}
+          	if(debuggingMessagesTurnedOn){
+          		console.log("list < 10");
+          	}
     	last10LocationSearches.push(search2Push);
 	}else{// if already 10 items, pop oldest one off array
-    	if(debuggingMessagesTurnedOn){
-			console.log("list is over 10, popping oldest item")		
-		}
+          	if(debuggingMessagesTurnedOn){
+      			   console.log("list is over 10, popping oldest item")		
+      		  }
     	last10LocationSearches.shift();
     	last10LocationSearches.push(search2Push);
 	}
@@ -72,43 +70,51 @@ database.ref().on("value", function(snapshot) {
 
 
   if (snapshot.child("recentSearches").exists() && snapshot.child("locationArray").exists()) {
-	if(debuggingMessagesTurnedOn){
-		console.log("This is when there is search history to read.");
-	}
+            	if(debuggingMessagesTurnedOn){
+            		console.log("This is when there is search history to read.");
+            	}
   	var display = snapshot.child("recentSearches").val();
-
-  	//$("#Weather").text(display);
   	var searchList = snapshot.child("locationArray").val();
-	if(debuggingMessagesTurnedOn){
-	  	console.log("Snapshot Array is: " + searchList);
-	}
+            	if(debuggingMessagesTurnedOn){
+            	  	console.log("Snapshot Array is: " + searchList);
+            	}
   	$("#Weather").empty();
   	last10LocationSearches = [];
   	for (var i = 0; i<searchList.length;i++){
-	if(debuggingMessagesTurnedOn){
-	  console.log("Item# " + i + " has value of " + searchList[i]);
-	}
-	  last10LocationSearches.push(searchList[i]);
-      var buttonList = $("<button>");
-      buttonList.text(searchList[i]);
-      buttonList.attr("location-to-search", searchList[i]);
-      buttonList.attr("class", "btn btn-default search-button");
-//      buttonList.attr("class", "btn btn-default");
-      //buttonList.attr("display", "block");
-      // buttonList.attr("background-color", "#e7e7e7");
-      // buttonList.attr("color", "black");
-//      $("#Weather").prepend("<p>" + buttonList + "<p>");   
-      $("#Weather").prepend("<p>");   
-      $("#Weather").prepend(buttonList);
-   
-
+          	if(debuggingMessagesTurnedOn){
+          	  console.log("Item# " + i + " has value of " + searchList[i]);
+          	}
+        	    last10LocationSearches.push(searchList[i]);
+              var buttonList = $("<button>");
+              buttonList.text(searchList[i]);
+              buttonList.attr("location-to-search", searchList[i]);
+              buttonList.attr("class", "btn btn-default search-button");
+        //      buttonList.attr("class", "btn btn-default");
+              //buttonList.attr("display", "block");
+              // buttonList.attr("background-color", "#e7e7e7");
+              // buttonList.attr("color", "black");
+        //      $("#Weather").prepend("<p>" + buttonList + "<p>");   
+              $("#Weather").prepend("<p>");   
+              $("#Weather").prepend(buttonList);
   	}
+
+          // console logging array to be sure what it looks like
+        if(debuggingMessagesTurnedOn){
+            console.log("Local array looks like this: " + last10LocationSearches);
+          }
+      }else{
+              if(debuggingMessagesTurnedOn){
+                  console.log("This is when there HAS NOT BEEN ANY search(firebase was reset, or zombie apocalypse has destroyed the data center)");
+              }
+              //display that are no recent searches
+              $("#Weather").text(currentSearch);
+      }
 
        // now make an on.clock event for the buttons to trigger a search
 //      $(".btn-default").on("click", function() {
       $(".search-button").on("click", function() {
             		if(debuggingMessagesTurnedOn){
-                  	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
+                  	console.log("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
                   }
 
 
@@ -118,108 +124,33 @@ database.ref().on("value", function(snapshot) {
             mapTypeId: google.maps.MapTypeId.HYBRID
           });       
         var input = $(this).attr("location-to-search");
-//        var input = map.getDiv().querySelector($(this).attr("location-to-search"));
-        //var divInput = map.getDiv().querySelector(input);
-        console.log('recent search button', input);
-        //console.log('divInput', divInput);
+                  if(debuggingMessagesTurnedOn){
+                      console.log('recent search button', input);
+                  }
 //        var searchBox = new google.maps.places.SearchBox(input);
         var searchBox = new google.maps.places.PlacesService(map);
 //        var searchBox = new google.maps.places.querySelector(input);
 
-google.maps.event.addListenerOnce(map, 'idle', function(){  
-    var request = {
-//        query: 'Orlando'
-        query: input
-    };
+          google.maps.event.addListenerOnce(map, 'idle', function(){  
+              var request = {
+          //        query: 'Orlando'
+                  query: input
+              };
 
-    //searchBox = new google.maps.places.PlacesService(map);
-    searchBox.textSearch(request, callback);
+              searchBox.textSearch(request, callback);
 
-    function callback(results, status) {
-        if (status == google.maps.places.PlacesServiceStatus.OK) {
-            //grab the first item, Orlando, Florida, USA
-            var place = results[0];
-            input.value = place.formatted_address; 
-            map.setCenter(place.geometry.location);
-        }
-    }
-//});       
-//        var searchBox = new google.maps.places.query(input);
-       
-
-        
-        // map.addListener('bounds_changed', function() {
-        //   searchBox.setBounds(map.getBounds());
-        // });
-
-        // var markers = [];
-       
-        // searchBox.addListener('places_changed', function() {
-        //   var places = searchBox.getPlaces();
-
-        //   if (places.length == 0) {
-        //     return;
-        //   }
-          
-        //   markers.forEach(function(marker) {
-        //     marker.setMap(null);
-        //   });
-        //   markers = [];
-
-        //   var bounds = new google.maps.LatLngBounds();
-        //   places.forEach(function(place) {
-        //     if (!place.geometry) {
-              
-        //       return;
-        //     }
-        //     var icon = {
-        //       url: place.icon,
-        //       size: new google.maps.Size(71, 71),
-        //       origin: new google.maps.Point(0, 0),
-        //       anchor: new google.maps.Point(17, 34),
-        //       scaledSize: new google.maps.Size(25, 25)
-        //     };
-
-        //     markers.push(new google.maps.Marker({
-        //       map: map,
-        //       icon: icon,
-        //       title: place.name,
-        //       position: place.geometry.location
-        //     }));
-
-        //      if (place.geometry.viewport) {
-              
-        //       bounds.union(place.geometry.viewport);
-        //     } else {
-        //       bounds.extend(place.geometry.location);
-        //     }
-        //   });
-        //   map.fitBounds(bounds);
-        // });
-      //}
+              function callback(results, status) {
+                  if (status == google.maps.places.PlacesServiceStatus.OK) {
+                      //grab the first item, Orlando, Florida, USA
+                      var place = results[0];
+                      input.value = place.formatted_address; 
+                      map.setCenter(place.geometry.location);
+                  }
+              }
+          });   // closes           google.maps.event.addListenerOnce(map, 'idle', function(){      
+    });      // closes       $(".search-button").on("click", function() { 
+});    // closes "database.ref().on("value", function(snapshot) {"   
 
 
 
-});
 
-      $(".btn-button").on("click", function() {
-      //$(".search-button").on("click", function() {
-		if(debuggingMessagesTurnedOn){
-      	alert("a button was clicked, " + $(this).attr("location-to-search") + " is the value");
-      }
-      });
-      // console logging array to be sure what it looks like
-      	if(debuggingMessagesTurnedOn){
-      	  	console.log("Local array looks like this: " + last10LocationSearches);
-      	  }
-
-  }else{
-        	if(debuggingMessagesTurnedOn){
-        	  	console.log("This is when there HAS NOT BEEN ANY search(firebase was reset, or zombie apocalypse has destroyed the data center)");
-        	}
-  	//display that are no recent searches
-    $("#Weather").text(currentSearch);
-
-  }
-
-});
