@@ -26,3 +26,11 @@ var def = new Egg("left, up", function(){
   $("#submitCity").css("background-color",'#82685c')
   $(".search-button").css({"background-color": '#82685c', "color": '#f7f6c5'})
 }).listen();
+
+
+var murderHouse = new Egg("up,up,down,down,left,right,left,right,b,a", function() {
+  console.log("easter egg triggered");
+  jQuery('#murder-house-img').fadeIn(500, function() {
+    window.setTimeout(function() { jQuery('#murder-house-img').hide(); }, 15000);
+  });
+}).listen();
