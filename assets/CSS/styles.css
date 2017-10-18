@@ -1,40 +1,84 @@
 
-
 body{
-	background: url('../images/bgmap.jpg');
+  background: url('../images/bgmap1.jpg') center;
   }
 .container {
-	background-color: #723d22;
-	color: #e8cfa2;
+  background-color: #723d22;
+  color: #e8cfa2;
+  float: left;
+  max-width: 980px;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  margin-left: 20px;
+  margin-top: 50px;
+}
+#entryForm {
+  margin-top: 20px;
+}
+.pac-container {
+  height: 75px;
+  overflow-y: scroll;
 }
 
- #cityName, #zipCode {
+ #cityName  {
   color: #000;
   border: 3px solid;
   border-color: #82685c;
-   background-color: #fff;
-        font-family: Roboto;
-        font-size: 15px;
-        font-weight: 300;
-        margin-left: 12px;
-        padding: 0 11px 0 13px;
-        text-overflow: ellipsis;
-        width: 400px;
+  background-color: #fff;
+  font-family: Roboto;
+  font-size: 15px;
+  font-weight: 300;
+  margin-left: 12px;
+  padding: 0 11px 0 13px;
+  text-overflow: ellipsis;
+  width: 400px;
 }
 
 #submitCity {
-	background-color: #82685c;
-	margin: 5px;
-	color:#e8cfa2;
+  background-color: #82685c;
+  margin: 5px;
+  color:#e8cfa2;
+
 }
 
 #map {
-	width:500px;
-	height:400px;
-	margin:10px;
+  width:500px;
+  height:400px;
+  margin:10px;
+  margin-top: 20px;
 }
 
+
+}
 .search-button {
   background-color: #82685c;
   color: #f7f6c5;
+}
+
+#themes {
+  margin-top: 25px;
+  margin-bottom: 30px;
+  font-weight: bold;
+  font-size: 11px;
+  text-align: center;
+  overflow: hidden;
+}
+.weather {
+  width: 300px;
+  float: right;
+  margin-right: 75px;
+  background-color: #723d22;
+  color: #e8cfa2;
+  margin-top: 50px;
+  padding: 7px;
+  text-align: center;
+  height: 190px;
+  font-weight: bold;
+  font-size: 19px;
+  line-height: 22px;
+}
+h3 {
+  font-size: 25px;
+  font-weight: bold;
+  text-decoration: underline;
 }
