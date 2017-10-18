@@ -10,7 +10,7 @@ body{
   padding-top: 10px;
   padding-bottom: 10px;
   margin-left: 20px;
-  margin-top: 50px;
+  margin-top: 40px;
 }
 #entryForm {
   margin-top: 20px;
@@ -34,7 +34,7 @@ body{
   width: 400px;
 }
 
-#submitCity {
+#submitCity, #submitInfo {
   background-color: #82685c;
   margin: 5px;
   color:#e8cfa2;
@@ -50,7 +50,7 @@ body{
 
 
 }
-.search-button {
+.search-button, .submit-button {
   background-color: #82685c;
   color: #f7f6c5;
 }
@@ -76,6 +76,17 @@ body{
   font-weight: bold;
   font-size: 19px;
   line-height: 22px;
+}
+
+.updated {
+  width: 400px;
+  background-color: #723d22;
+  color: #e8cfa2;
+  margin-top: 100px;
+  height: 200px;
+  text-align: center;
+  margin-left: 85px;
+  float: left;
 }
 h3 {
   font-size: 25px;

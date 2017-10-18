@@ -84,6 +84,28 @@
       <div class="temp_min">Low: 78</div>
       <div class="wind">Wind: 12 MPH</div>
   </div>
+  </div>
+
+  <div class="updated">
+  <div id="updated">
+  <h3>App Update Notification</h3>
+  <p>Submit your name and email to receive notifications on updates</p>
+      <form id="updateform", action="mailto:gavinervin47@gmail.com" method="post" enctype="text/plain">
+        <ol>
+          <ul>
+            <label for="name">Name</label>
+            <input type="text" name="name" id="name" placeholder="John Smith" required="required">        
+          </ul>
+          <ul>
+            <label for="email">Email</label>
+            <input type="text" name="email" id="email" placeholder="example@gmail.com" required="required">        
+          </ul>
+        </ol>
+        <!--input type="submit" name="submit"-->
+        <button id= "submitInfo" type= "submit" class= "btn btn-default">Submit<br>
+      </form>
+  </div>
+  </div>
 </body>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCnNcKtuovwZfvrD9e3jO8lHrn6buwQ3Rg&libraries=places&callback=initAutocomplete"
  async defer></script>
