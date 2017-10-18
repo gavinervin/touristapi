@@ -154,3 +154,41 @@ database.ref().on("value", function(snapshot) {
 
 
 
+//////////////////////
+// onclick for easter egg image
+$("#murder-house-img").on("click", function() {
+        event.preventDefault();
+        var murderCity = $("#cityName").val().trim() + " murder house";
+        console.log("clicked on murder house for " + murderCity)
+
+
+          var map = new google.maps.Map(document.getElementById('map'), {
+            center: {lat: 35.89989698213954, lng: -79.01249361429444},
+            zoom: 19,
+            mapTypeId: google.maps.MapTypeId.HYBRID
+          });       
+
+        var searchBox = new google.maps.places.PlacesService(map);
+
+
+          google.maps.event.addListenerOnce(map, 'idle', function(){  
+              var request = {
+          //        query: 'Orlando'
+                  query: murderCity
+              };
+
+              searchBox.textSearch(request, callback);
+
+              function callback(results, status) {
+                  if (status == google.maps.places.PlacesServiceStatus.OK) {
+                      //grab the first item, Orlando, Florida, USA
+                      var place = results[0];
+                      murderCity.value = place.formatted_address; 
+                      map.setCenter(place.geometry.location);
+                  }
+              }
+          });
+
+
+
+});
